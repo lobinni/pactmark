@@ -1,0 +1,40 @@
+{
+  "name": "pactmark",
+  "private": true,
+  "description": "Evidence-based agreement protocol for digital work — live on GenLayer Studionet.",
+  "license": "MIT",
+  "repository": "github:lobinni/pactmark",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "node scripts/icons/generate-icons.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "icons": "node scripts/icons/generate-icons.mjs",
+    "check:contract": "python3 scripts/deploy/check_contract.py",
+    "verify:deployment": "node scripts/deploy/verify_deployment.mjs",
+    "demo": "python3 scripts/demo/run_demo.py",
+    "demo:check": "python3 scripts/demo/run_demo.py --check",
+    "test": "python3 -m unittest discover -s tests -t ."
+  },
+  "dependencies": {
+    "clsx": "2.1.1",
+    "genlayer-js": "^1.1.8",
+    "lucide-react": "^1.51.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "tailwind-merge": "3.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.1.17",
+    "@types/node": "22.19.17",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "5.1.1",
+    "tailwindcss": "4.1.17",
+    "typescript": "5.9.3",
+    "vite": "7.3.2",
+    "vite-plugin-singlefile": "2.3.0"
+  }
+}

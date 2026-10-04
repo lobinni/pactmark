@@ -1,0 +1,63 @@
+{
+  "network": "studionet",
+  "contract_address": "0xbE2Dd3c07322b013244477646977935b4fF21A73",
+  "contract_explorer": "https://explorer-studio.genlayer.com/address/0xbE2Dd3c07322b013244477646977935b4fF21A73",
+  "agreement_id": "AGR-DEMO-0001",
+  "buyer": "0x1111111111111111111111111111111111111111",
+  "worker": "0x2222222222222222222222222222222222222222",
+  "currency": "GEN",
+  "amount": "2000000000000000000",
+  "created_at": 1770000000,
+  "deadline": 1770864000,
+  "title": "Timestamp parser hardening and liveness documentation",
+  "description": "Hard argument parsing at the API boundary and document the service liveness surface for the pilot deployment on GenLayer Studionet.",
+  "specification": "Deliver a hardened timestamp parser that returns typed errors for malformed input, plus deployment notes that document the health surface exercised by a smoke suite.",
+  "policies": { "evidence": "STRICT", "verification": "ADVERSARIAL", "dispute": "JURY" },
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "description": "The deliverable parses RFC 3339 timestamps and surfaces typed errors for malformed input.",
+      "method": "CODE_INSPECTION",
+      "evidence_requirements": "Quote the code or test passage that shows parsing behaviour and the typed ParseError path.",
+      "expect_quote": "rejects malformed input with a typed ParseError",
+      "evidence_ref": "E1",
+      "scenario_b_verdict": "FAIL"
+    },
+    {
+      "id": "REQ-002",
+      "description": "A liveness endpoint is documented and exercised by a smoke check.",
+      "method": "DOCUMENT_INSPECTION",
+      "evidence_requirements": "Quote the documentation passage naming the liveness endpoint or probe.",
+      "expect_quote": "exposes /health for liveness probes",
+      "evidence_ref": "E2",
+      "scenario_b_verdict": "PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "item_id": "E1",
+      "kind": "text",
+      "content": "The parser accepts RFC 3339 timestamps at the API boundary and rejects malformed input with a typed ParseError, with property tests that cover 5000 generated cases."
+    },
+    {
+      "item_id": "E2",
+      "kind": "text",
+      "content": "Deployment notes: the service passes the published smoke suite on chain 61999 and exposes /health for liveness probes used by the orchestrator."
+    }
+  ],
+  "challenge": {
+    "requirement_id": "REQ-001",
+    "side": "WORKER",
+    "claim": "The generated property suite already proves the parser rejects malformed input as required.",
+    "evidence_id": "E1",
+    "quote": "property tests that cover 5000 generated cases",
+    "reasoning": "The worker argues the property tests demonstrate the typed error behaviour even though the parsing passage is absent from the frozen evidence.",
+    "statement": "The property tests cover the malformed input path exhaustively, so the requirement should be judged satisfied.",
+    "response": "The frozen evidence never shows the parsing behaviour itself; a test count is not the behaviour the requirement demands."
+  },
+  "jurors": [
+    { "address": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "vote": "BUYER", "salt": "north-lantern-7q" },
+    { "address": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "vote": "BUYER", "salt": "copper-ember-3z" },
+    { "address": "0xcccccccccccccccccccccccccccccccccccccccc", "vote": "WORKER", "salt": "velvet-anchor-9k" }
+  ]
+}
